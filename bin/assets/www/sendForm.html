@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+   <meta charset="UTF-8" />
+   <title>Send Form</title>
+   <script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>
+  
+  <script type="text/javascript">
+  	// Заполним картинку
+  	function onPageLoaded()
+  	{
+  	 var docLocation = "" + document.location;
+	 var firstArgPos = docLocation.indexOf("=")+1;
+	 var imgSrc = docLocation.substring(firstArgPos);
+	 var image = document.getElementById("cameraImage");
+	 image.src=imgSrc;
+	 console.log("LOOOOOOOG", imgSrc);
+  	}
+  	//  <img id="cameraImage" name="loadedImage" border="1" height="200" width="300" src="" alt="Your browser can't show the images" />
+  </script>
+
+ </head>
+ <body onLoad="onPageLoaded()">
+  <h3>Заполните форму</h3>
+  <form id="sendForm" name="form">
+	First name: <input type="text" name="" value="Mickey" /><br />
+	Last name:<input type="text" name="lname" value="Mouse" /><br />
+	<input type="submit" value="Отправить" />
+  </form>
+  <h6>Выбранное изображение</h6>
+
+ </body>
+</html>

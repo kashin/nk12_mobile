@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <title>Send picture</title>
+   <meta charset="UTF-8" />
+   <script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>
+ </head>
+ <body>
+  <h3>Создайте или загрузите изображение для отправки</h3>
+  <button onclick="openCamera()">Создать снимок</button>
+  <button onclick="loadPicture()">Загрузить изображение</button>
+  <button id="sendButton" disabled="disabled" onclick="sendPicture()">Далее</button>
+  <img id="cameraImage" name="loadedImage" border="0" height="200" width="300" src="test.jpg" alt="No photo" />
+
+  
+  <script type="text/javascript">
+    var pictureSource;   // picture source
+    var destinationType; // sets the format of returned value 
+   
+    document.addEventListener("deviceready",onDeviceReady,false);
+
+    // PhoneGap is ready to be used!
+    //
+    function onDeviceReady() {
+        pictureSource=navigator.camera.PictureSourceType;
+        destinationType=navigator.camera.DestinationType;
+    }
+   
+  	function openCamera() {
+ 	 	navigator.camera.getPicture(onSuccess, onFailed,
+ 	 	{quality: 100,
+ 	 	sourceType : Camera.PictureSourceType.CAMERA,
+ 	 	allowEdit : true,
+  		encodingType: Camera.EncodingType.JPEG,
+  		destinationType: navigator.camera.DestinationType.FILE_URI,
+  		targetWidth: 200,
+  		targetHeight: 300 });
+ 	}
+  
+  	function onSuccess(source) {
+  		var image = document.getElementById("cameraImage");
+  		image.src = source;
+   		var button = document.getElementById("sendButton");
+  		button.removeAttribute("disabled");
+   	}
+  
+  	function onFailed(message) {
+  		var image = document.getElementById("cameraImage");
+  		image.alt="Can't get the message, error: " + message;  	
+  	}
+  	
+  	function sendPicture() {
+		imageSource= "" +document.loadedImage.src;
+	 	window.location="sendForm.html?="+imageSource;
+   	}
+   	
+   	function loadPicture() {
+ 	 	navigator.camera.getPicture(onSuccess, onFailed,
+ 	 	{quality: 100,
+ 	 	sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
+ 	 	allowEdit : true,
+  		encodingType: Camera.EncodingType.JPEG,
+  		destinationType: navigator.camera.DestinationType.FILE_URI,
+  		targetWidth: 200,
+  		targetHeight: 300 });
+   	}
+  </script>
+ </body>
+</html>

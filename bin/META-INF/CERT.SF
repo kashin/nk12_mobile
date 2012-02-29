@@ -1,0 +1,40 @@
+Signature-Version: 1.0
+Created-By: 1.0 (Android)
+SHA1-Digest-Manifest: /0TMryPXjrRT1pIqK6oIS8cD+2g=
+
+Name: res/layout/main.xml
+SHA1-Digest: gkc1Ry1/PIbrKmNAfGhiCosXf8E=
+
+Name: assets/www/phonegap-1.4.1.js
+SHA1-Digest: Y0t4NAFmSak5gogJCQmKn+ypWtY=
+
+Name: assets/www/sendForm.html
+SHA1-Digest: 03xUIG83y4O/VXwO5GwrWch0OcQ=
+
+Name: AndroidManifest.xml
+SHA1-Digest: mZqiQCwyaHgsoVngsdgJaw5sK0k=
+
+Name: res/drawable-mdpi/ic_launcher.png
+SHA1-Digest: zSBo0hBNc4K46aIFvlD4ZmQBHcg=
+
+Name: res/drawable-hdpi/ic_launcher.png
+SHA1-Digest: YuN8HjuH/csIGA1V8jxQw62DV0A=
+
+Name: res/xml/phonegap.xml
+SHA1-Digest: uEp78K8cdWselvJJBpupxLxPeQs=
+
+Name: res/xml/plugins.xml
+SHA1-Digest: A4RD1folgSGLCRDkQ8cGywh6Ag0=
+
+Name: assets/www/index.html
+SHA1-Digest: 62wNdGBcPHllMtLTsgopd7PHZOk=
+
+Name: resources.arsc
+SHA1-Digest: KynlR26ADq4Lk/ky3mR8BIC3wDk=
+
+Name: classes.dex
+SHA1-Digest: o2CNQRQsKmcQdBdwgB7AuhOwbCQ=
+
+Name: res/drawable-ldpi/ic_launcher.png
+SHA1-Digest: edY5GhthxxpZN3rJpWsoorrticI=
+

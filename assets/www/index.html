@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <title>Send picture</title>
+   <meta charset="UTF-8" />
+   <script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>
+ </head>
+ <body onload="onPageLoaded()">
+	<div id="mainContent">
+		<h3>Создайте или загрузите изображение для отправки</h3>
+		<button onclick="openCamera()">Создать снимок</button>
+		<button onclick="loadPicture()">Загрузить изображение</button>
+		<br />
+		<button id="sendButton" disabled="disabled" onclick="sendPicture()">Далее</button>
+		<br />
+		<!-- <img id="cameraImage" name="loadedImage" border="0" height="200" width="300" src="test.jpg" alt="No photo" /> -->
+	</div>
+
+	<script type="text/javascript">
+    var pictureSource;   // picture source
+    var destinationType; // sets the format of returned value 
+   
+    document.addEventListener("deviceready",onDeviceReady,false);
+
+    // PhoneGap is ready to be used!
+    //
+    function onDeviceReady() {
+        pictureSource=navigator.camera.PictureSourceType;
+        destinationType=navigator.camera.DestinationType;
+    }
+   
+   	function loadPicture() {
+ 	 	navigator.camera.getPicture(onSuccess, onFailed,
+ 	 	{quality: 100,
+ 	 	sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
+ 	 	allowEdit : true,
+  		encodingType: Camera.EncodingType.JPEG,
+  		destinationType: navigator.camera.DestinationType.FILE_URI,
+  		targetWidth: 100,
+  		targetHeight: 100 });
+   	}
+
+  	function openCamera() {
+ 	 	navigator.camera.getPicture(onSuccess, onFailed,
+ 	 	{quality: 100,
+ 	 	sourceType : Camera.PictureSourceType.CAMERA,
+ 	 	allowEdit : true,
+  		encodingType: Camera.EncodingType.JPEG,
+  		destinationType: navigator.camera.DestinationType.FILE_URI,
+  		targetWidth: 100,
+  		targetHeight: 100 });
+ 	}
+  
+  	function onPageLoaded() {
+  	if (sessionStorage.getItem("imagesCount") !== null) {
+  			for (var i = 0; i < sessionStorage.imagesCount; i++)
+  			{
+  			 if (sessionStorage.getItem("picture"+i) === null)
+  				break;
+  			 createNewImage(sessionStorage.getItem("picture"+i), i);
+  			}
+   			var button = document.getElementById("sendButton");
+   			if (button.hasAttribute("disabled")) {
+  				button.removeAttribute("disabled");
+  			}
+  		} else {
+  			var i = 0;
+  			sessionStorage.imagesCount = i;
+  		}	
+  	}
+  	
+  	function createNewImage(src, number) {
+  		var mainBodyPart=document.getElementById("mainContent");
+  		var img = document.createElement("img");
+  		img.src = src;
+  		img.width = 100;
+  		img.height = 100;
+  		img.id = "loadedImage" + number
+  		img.border = "1";
+  		img.alt = "Не возможно загрузить изображение";
+		mainBodyPart.appendChild(img);
+  	}
+  	
+  	function onSuccess(source) {
+		var imagesCount = sessionStorage.imagesCount;		
+		createNewImage(source, imagesCount);		
+		sessionStorage.imagesCount = imagesCount + 1;
+   		var button = document.getElementById("sendButton");
+   		if (button.hasAttribute("disabled")) {
+  			button.removeAttribute("disabled");
+  		}
+   	}
+  
+  	function onFailed(message) {
+  		var image = document.getElementById("cameraImage");
+  		image.alt="Can't get the message, error: " + message;  	
+  	}
+  	
+  	function sendPicture() {
+  		if(typeof(Storage)!=="undefined")
+  		{
+   			var allImages = document.getElementsByTagName("img")
+   			for (var i = 0; i < allImages.length; i++)
+   			{
+   				sessionStorage.setItem("picture"+i, allImages[i].src);
+   			}
+  		}
+		else
+  		{
+  			// argh, browser doesn't support the Web Storage in HTML5;
+  		}
+  	
+	 	window.location.assign("sendForm.html");
+   	}
+   	
+  </script>
+ </body>
+</html>
