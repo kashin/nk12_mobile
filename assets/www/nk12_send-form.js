@@ -24,16 +24,12 @@ function onSubmitClicked()
   	 
 
  if (sessionStorage.getItem("imagesCount") !== null) {
-	if (sessionStorage.getItem("uploadedFilesCount")!==null){
-		sessionStorage.uploadedFilesCount = 0;
-		uploadFile(sessionStorage.getItem("picture" + 0))
-	} else {
-		sessionStorage.uploadedFilesCount = 0;
-		uploadFile(sessionStorage.getItem("picture" + 0))
-		sessionStorage.setItem("uploadedFilesCount", 1);
+	for (var i = 0; i < sessionStorage.imagesCount; i++) {
+		sessionStorage.uploadedFilesCount = i;
+		uploadFile(sessionStorage.getItem("picture" + i));
 	}
 } else {
-	//TODO: WTF??
+	alert("error: imagesCount не существует!");
        }	
 }
   	
@@ -45,17 +41,12 @@ function uploadFile(imgSrc) { // test URI = http://borki67km.ru/67/tst_upload.ph
 	http.send(null);*/
 var uploadSuccess = function(response) {
 	if (sessionStorage.getItem("uploadedFilesCount") !== null) {
-		sessionStorage.uploadedFilesCount = sessionStorage.uploadedFilesCount + 1;
 		if (sessionStorage.uploadedFilesCount === sessionStorage.imagesCount) {
-			alert("Файлы успешно загружены");
+			alert("Файлы успешно загружены:" + response.response);
 			return;
 		}
-		uploadFile(sessionStorage.getItem("picture" + sessionStorage.uploadedFilesCount))
 		return;
-	} else {
-		// something strange. Looks like assert...
 	}
-	alert("Файлы успешно загружены" + response.response);
 }
 
 var uploadFailed = function(error) {

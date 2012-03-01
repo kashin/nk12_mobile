@@ -46,9 +46,7 @@
  	 	sourceType : Camera.PictureSourceType.CAMERA,
  	 	allowEdit : true,
   		encodingType: Camera.EncodingType.JPEG,
-  		destinationType: navigator.camera.DestinationType.FILE_URI,
-  		targetWidth: 100,
-  		targetHeight: 100 });
+  		destinationType: navigator.camera.DestinationType.FILE_URI});
  	}
   
   	function onPageLoaded() {
@@ -75,16 +73,20 @@
   		img.src = src;
   		img.width = 100;
   		img.height = 100;
-  		img.id = "loadedImage" + number
-  		img.border = "1";
+  		img.border = "2";
   		img.alt = "Не возможно загрузить изображение";
+  		img.onclick = function() { removeImage(this); }; 
 		mainBodyPart.appendChild(img);
+  	}
+  	
+  	function removeImage(img) {
+  		var mainBodyPart=document.getElementById("mainContent");
+  		mainBodyPart.removeChild(img)
   	}
   	
   	function onSuccess(source) {
 		var imagesCount = sessionStorage.imagesCount;		
 		createNewImage(source, imagesCount);		
-		sessionStorage.imagesCount = imagesCount + 1;
    		var button = document.getElementById("sendButton");
    		if (button.hasAttribute("disabled")) {
   			button.removeAttribute("disabled");
@@ -97,17 +99,20 @@
   	}
   	
   	function sendPicture() {
+		sessionStorage.setItem("imagesCount", 0);
   		if(typeof(Storage)!=="undefined")
   		{
    			var allImages = document.getElementsByTagName("img")
    			for (var i = 0; i < allImages.length; i++)
    			{
    				sessionStorage.setItem("picture"+i, allImages[i].src);
+   				sessionStorage.imagesCount = sessionStorage.imagesCount + 1;
    			}
   		}
 		else
   		{
-  			// argh, browser doesn't support the Web Storage in HTML5;
+  			//TODO: argh, browser doesn't support the Web Storage in HTML5;
+  			//We need to handle it somehow.
   		}
   	
 	 	window.location.assign("sendForm.html");
