@@ -14,59 +14,5 @@
 	УИК:<input type="number" name="uik" value="" /><br />
 	<input type="submit" value="Отправить" onclick="onSubmitClicked()" />
   </form>
-  <!-- 
-  <script type="text/javascript">
-  	function onPageLoaded()
-  	{
-	 var str = localStorage.getItem("email");
-	 document.form.emailAddress.value = str;
-	 
-	 str = localStorage.getItem("password");
-	 document.form.password.value = str;
-	 
-	 str = localStorage.getItem("uik");
-	 document.form.uik.value = str;
-  	}
-  	
-  	function onSubmitClicked()
-  	{
-  	 if (document.form.emailAddress.value === "" ||
-  	 document.form.password.value === "" ||
-  	 document.form.uik.value === "") {
-  	 	alert("Пожалуйста, заполните все необходимые поля");
-  	 	return;
-  	 }
-  	 
-  	 localStorage.setItem("email", document.form.emailAddress.value);
-  	 localStorage.setItem("password", document.form.password.value);
-  	 localStorage.setItem("uik", document.form.uik.value);
-  	 
-  	 if (sessionStorage.getItem("imagesCount") !== null) {
-  			for (var i = 0; i < sessionStorage.imagesCount; i++)
-  			{
-  				uploadFile(sessionStorage.getItem("picture" + i, i))
-  			}
-  		} else {
-  		//TODO: WTF??
-  		}	
-  	}
-  	
-  	function uploadFile(imgSrc) {
-  	 var options = new FileUploadOptions();
-     options.fileKey="file";
-     options.fileName=imgSrc.substr(imgSrc.lastIndexOf('/')+1);
-     options.mimeType="image/jpeg";
-
-     var params = new Object();
-     params.value1 = "uik"; // key
-     params.value2 = localStorage.getItem("uik"); //value
-
-     options.params = params;
-
-     var transfer = new FileTransfer();
-     transfer.upload(imgSrc, "http://some.server.com/upload.php", uploadSuccess, uploadFailed, options);  	
-  	} 
-  </script>
- -->
  </body>
 </html>
